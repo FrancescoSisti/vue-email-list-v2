@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di email e password casuali</title>
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="style/style.css">
+    <!-- Link FontAwesome -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css'
+        integrity='sha512-8BU3emz11z9iF75b10oPjjpamM4Mz23yQFQymbtwyPN3mNWHxpgeqyrYnkIUP6A8KyAj5k2p3MiYLtYqew7gIw=='
+        crossorigin='anonymous' />
+    <!-- Link bootstrap -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css'
+        integrity='sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=='
+        crossorigin='anonymous' />
+</head>
+
+<body>
+    <div id="app" class="container mt-5">
+        <h1 class="text-center mb-4">Generatore di email e password casuali</h1>
+        <button @click="toggleTheme" class="btn btn-outline-primary mb-3" id="themeToggle">
+            {{ isDarkTheme ? 'Passa al tema chiaro' : 'Passa al tema scuro' }}
+        </button>
+        <div class="row">
+            <!-- Colonna per il generatore di email -->
+            <div class="col-md-6">
+                <h2 class="text-center mb-3">Email Casuali</h2>
+                <div v-if="!loadingCompleted" class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Caricamento...</span>
+                    </div>
+                    <span class="text-center">Generazione email in corso...</span>
+                </div>
+                <ul v-else class="list-group">
+                    <li v-for="(email, index) in emails" :key="index"
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                        @mousemove="handleMouseMove($event, index)">
+                        <div class="neon-effect"></div>
+                        {{ email }}
+                        <button @click="copyEmail(email, index)" class="btn btn-outline-secondary btn-sm"
+                            :title="copiedIndex === index ? 'Copiato!' : 'Copia email'">
+                            <i :class="copiedIndex === index ? 'fas fa-check' : 'far fa-copy'"></i>
+                        </button>
+                    </li>
+                </ul>
+                <div class="text-center mt-4">
+                    <button @click="generateEmails" class="btn btn-primary">Genera nuove email</button>
+                </div>
+            </div>
+
+            <!-- Colonna per il generatore di password -->
+            <div class="col-md-6">
+                <h2 class="text-center mb-3">Generatore di Password</h2>
+                <div class="mb-3">
+                    <label for="passwordLength" class="form-label">Lunghezza: {{ passwordLength }}</label>
+                    <input type="range" class="form-range" id="passwordLength" v-model="passwordLength" min="8"
+                        max="32">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="includeUppercase" v-model="includeUppercase">
+                    <label class="form-check-label" for="includeUppercase">Includi maiuscole</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="includeNumbers" v-model="includeNumbers">
+                    <label class="form-check-label" for="includeNumbers">Includi numeri</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="includeSpecialChars"
+                        v-model="includeSpecialChars">
+                    <label class="form-check-label" for="includeSpecialChars">Includi caratteri speciali</label>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" :value="password" readonly>
+                </div>
+                <div class="text-center">
+                    <button @click="generatePassword" class="btn btn-primary me-2">Genera Password</button>
+                    <button @click="copyPassword" class="btn btn-secondary">
+                        {{ passwordCopied ? 'Copiato!' : 'Copia Password' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <span class="footer-text">
+                <i class="fab fa-github github-icon"></i>
+                <a href="https://github.com/FrancescoSisti" target="_blank">Il mio GitHub</a>
+            </span>
+            <span class="footer-text">&copy; 2024 Generatore di email e password casuali</span>
+            <span class="footer-text">Realizzato con ❤️ da Francesco Sisti</span>
+        </div>
+    </footer>
+    <!-- Link Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--Link Vue-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Link JS -->
+    <script src="script/script.js"></script>
+    </div>
+</body>
+
+
+</html>

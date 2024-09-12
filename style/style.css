@@ -1,0 +1,318 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Stili per il contenitore principale */
+#app {
+    padding-bottom: 100px;
+    /* Aggiunge spazio sotto il contenuto principale per il footer */
+}
+
+/* Stili per la lista */
+.list-group {
+    max-width: 700px;
+    margin: 30px auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+}
+
+.list-group-item {
+    padding: 20px 25px;
+    background-color: transparent;
+    border-left: none;
+    border-bottom: 1px solid rgba(0, 123, 255, 0.2);
+    transition: all 0.4s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+    transform: translateX(5px) scale(1.02);
+    box-shadow: -5px 0 15px rgba(0, 123, 255, 0.1);
+}
+
+.list-group-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 5px;
+    background: linear-gradient(to bottom, #007bff, #00bcd4);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.list-group-item:hover::before {
+    transform: scaleY(1);
+}
+
+.list-group-item button {
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid #007bff;
+    background-color: transparent;
+    color: #007bff;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.list-group-item button:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Effetto neon per gli elementi della lista */
+.neon-effect {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.4) 0%, rgba(0, 123, 255, 0) 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: blur(15px);
+    transform: translate(-50%, -50%);
+    /* Questo centra l'effetto */
+}
+
+.list-group-item:hover .neon-effect {
+    opacity: 1;
+}
+
+/* Stile per lo spinner di caricamento */
+.spinner-border {
+    color: #007bff;
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Stile per il testo di caricamento */
+.text-center {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #007bff;
+    font-weight: 500;
+}
+
+/* Stili per il footer */
+footer {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+footer .footer-text {
+    margin: 0 15px;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+footer a {
+    color: #64ffda;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #64ffda;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+footer a:hover::after {
+    transform: scaleX(1);
+}
+
+footer a:hover {
+    color: #00bfa5;
+}
+
+footer .github-icon {
+    margin-right: 8px;
+    font-size: 1.4em;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+
+footer a:hover .github-icon {
+    transform: rotate(360deg) scale(1.1);
+}
+
+/* Animazione per il footer */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 600px) {
+    footer {
+        padding: 20px 0;
+    }
+
+    footer .footer-content {
+        flex-direction: column;
+    }
+
+    footer .footer-text {
+        margin: 8px 0;
+    }
+}
+
+/* Tema chiaro (default) */
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Tema scuro */
+body.dark-theme {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+}
+
+.dark-theme .list-group {
+    background: linear-gradient(145deg, #222236, #2a2a44);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .list-group-item {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+
+.dark-theme .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: -5px 0 15px rgba(0, 123, 255, 0.2);
+}
+
+.dark-theme .list-group-item::before {
+    background: linear-gradient(to bottom, #4a69bd, #6a89cc);
+}
+
+.dark-theme .list-group-item button {
+    border-color: #4a69bd;
+    color: #4a69bd;
+}
+
+.dark-theme .list-group-item button:hover {
+    background-color: #4a69bd;
+    color: #1a1a2e;
+}
+
+.dark-theme .neon-effect {
+    background: radial-gradient(circle, rgba(74, 105, 189, 0.4) 0%, rgba(74, 105, 189, 0) 70%);
+}
+
+.dark-theme .spinner-border,
+.dark-theme .text-center {
+    color: #4a69bd;
+}
+
+.dark-theme .btn-primary {
+    background-color: #4a69bd;
+    border-color: #4a69bd;
+}
+
+.dark-theme .btn-primary:hover {
+    background-color: #6a89cc;
+    border-color: #6a89cc;
+}
+
+.dark-theme .btn-secondary {
+    background-color: #2c3e50;
+    border-color: #2c3e50;
+}
+
+.dark-theme .btn-secondary:hover {
+    background-color: #34495e;
+    border-color: #34495e;
+}
+
+.dark-theme .form-control {
+    background-color: #2a2a44;
+    border-color: #4a69bd;
+    color: #e0e0e0;
+}
+
+.dark-theme .form-check-input:checked {
+    background-color: #4a69bd;
+    border-color: #4a69bd;
+}
+
+.dark-theme footer {
+    background-color: #0f0f1a;
+}
+
+.dark-theme footer a {
+    color: #6a89cc;
+}
+
+.dark-theme footer a::after {
+    background-color: #6a89cc;
+}
+
+.dark-theme footer a:hover {
+    color: #4a69bd;
+}
+
+/* ... resto del codice ... */
